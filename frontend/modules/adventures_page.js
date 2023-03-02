@@ -5,23 +5,94 @@ import config from "../conf/index.js";
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
-
+const url = new URLSearchParams(search);
+const cityName = url.get('city');
+return cityName;
 }
 
 //Implementation of fetch call with a paramterized input based on city
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
-
+try{
+  const responce = await fetch(config.backendEndpoint + "/adventures?city=bengaluru");
+  const json = await responce.json();
+  return json;
+}
+catch(error){
+  return null;
+}
 }
 
 //Implementation of DOM manipulation to add adventures for the given city from list of adventures
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
+  adventures.forEach((element)=>{
+  const data = document.getElementById("data");
+  const ele = document.createElement("div")
+  // ele.setAttribute("class", "col-6 col-lg-3, mb-4");
+
+  // let link = document.createElement("a")
+  // link.href = `"detail/?adventure=${element.id}" id="${element.id}"`
+  // let card = document.createElement("div")
+  // card.setAttribute("class", "card activity-card");
+  // let image = document.createElement("img")
+  // image.src = `${element.image}`
+  // card.append(image)
+  // let category = document.createElement("div")
+  // category.setAttribute("class", "category-banner float-right")
+  // category.append(element.category)
+  // card.append(category)
+  // let body = document.createElement("div")
+  // body.setAttribute("class", "card-body")
+  // let card1 = document.createElement("div")
+  // card1.setAttribute("class", "d-md-flex justify-content-between text-center")
+  // let text = document.createElement("h5")
+  // text.setAttribute("class", "card-title")
+  // text.append(element.name)
+  // let cost = document.createElement("p")
+  // cost.setAttribute("class", "card-text")
+  // cost.append(element.costPerHead)
+  // card1.append(text);
+  // card1.append(cost);
+  // body.append(card1);
+  // let card2 = document.createElement("div");
+  // card2.setAttribute("class", "d-md-flex justify-content-between text-center");
+  // let duration = document.createElement("h5");
+  // duration.setAttribute("class", "card-title");
+  // duration.innerText = "Duration";
+  // let hours = document.createElement("p");
+  // hours.setAttribute("class", "card-text");
+  // hours.append(element.duration)
+  // card2.append(duration);
+  // card2.append(hours);
+  // body.append(card2);
+  // card.append(body);
+  // link.append(card);
+  // ele.append(link);
+  ele.innerHTML =
+  `<a href="detail/?adventure=${element.id}" id="${element.id}">
+   <div class="card activity-card">
+   <img src="${element.image}" class="img-responsive"/>
+   <div class="category-banner float-right">${element.category}</div>
+   <div class="card-body">
+   <div class="d-md-flex justify-content-between text-center">
+   <h5 class="card-title">${element.name}</h5>
+   <p class=card-text>${element.costPerHead}</p>
+   </div>
+   <div class="d-md-flex justify-content-between text-center">
+   <h5 class="card-title">Duration</h5>
+   <p class=card-text>${element.duration}Hours</p>
+   </div>
+   </div>
+   </div>
+   </a>
+  ` 
+  data.append(ele);
+  })
 
 }
-
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.
 function filterByDuration(list, low, high) {
   // TODO: MODULE_FILTERS
