@@ -6,7 +6,7 @@ function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
 const url = new URLSearchParams(search);
-const cityName = url.get('city');
+const cityName = url.get("city");
 return cityName;
 }
 
@@ -15,7 +15,7 @@ async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
 try{
-  const responce = await fetch(config.backendEndpoint + "/adventures?city=bengaluru");
+  const responce = await fetch(config.backendEndpoint + `/adventures?city=${city}`);
   const json = await responce.json();
   return json;
 }
@@ -141,7 +141,7 @@ else if(filters["duration"].length > 0){
   );
 }
 else if(filters["category"].length > 0){
-  filteredList = f0ilterByCategory(list, filters["category"]);
+  filteredList = filterByCategory(list, filters["category"]);
 }
 else{
   filteredList = list;
@@ -185,7 +185,7 @@ function generateFilterPillsAndUpdateDOM(filters) {
 
     const categoryPills = filters.category.map(filter => {
       return `<div class="category-pill">${filter.value}</div>`;
-    }).join('')
+    })
     const categoryPillsContainer = document.getElementById("category-list")
     categoryPillsContainer.innerHTML = categoryPills;
   }
