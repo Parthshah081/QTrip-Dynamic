@@ -74,7 +74,7 @@ images.forEach((image, index)=>{
   const imageIndex = index === 0 ? 'class = "active"' : "";
   btnIndicator.setAttribute = ("data-bs-slide-to", `${imageIndex}`)
   btnIndicator.setAttribute = ("aria-current", "true")
-  btnIndicator.setAttribute = ("aria-lable", `slide ${imageIndex}`)
+  btnIndicator.setAttribute = ("aria-lable", `slide ${imageIndex + 1}`)
   indicator.append(btnIndicator);
   item.append(img);
   inner.append(item)
