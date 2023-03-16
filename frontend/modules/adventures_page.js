@@ -31,7 +31,7 @@ function addAdventureToDOM(adventures) {
   adventures.forEach((element)=>{
   const data = document.getElementById("data");
   const ele = document.createElement("div")
-  // ele.setAttribute("class", "col-6 col-lg-3, mb-4");
+  ele.className = "col-6 col-lg-3 mb-4 position-relative";
 
   // let link = document.createElement("a")
   // link.href = `"detail/?adventure=${element.id}" id="${element.id}"`
@@ -73,17 +73,17 @@ function addAdventureToDOM(adventures) {
   // ele.append(link);
   ele.innerHTML =
   `<a href="detail/?adventure=${element.id}" id="${element.id}">
+  <div class="category-banner float-right">${element.category}</div>
    <div class="card activity-card">
    <img src="${element.image}" class="img-responsive"/>
-   <div class="category-banner float-right">${element.category}</div>
-   <div class="card-body">
-   <div class="d-md-flex justify-content-between text-center">
-   <h5 class="card-title">${element.name}</h5>
-   <p class=card-text>${element.costPerHead}</p>
+   <div class="activity-card-text text-md-center w-100 mt-3">
+   <div class="d-block d-md-flex justify-content-between flex-wrap ps-3 pe-3">
+   <h5 class="text-left">${element.name}</h5>
+   <p>₹${element.costPerHead}</p>
    </div>
-   <div class="d-md-flex justify-content-between text-center">
-   <h5 class="card-title">Duration</h5>
-   <p class=card-text>${element.duration}Hours</p>
+   <div class="d-block d-md-flex justify-content-between flex-wrap ps-3 pe-3">
+   <h5 class="text-left">Duration</h5>
+   <p>${element.duration}Hours</p>
    </div>
    </div>
    </div>
@@ -182,12 +182,14 @@ function generateFilterPillsAndUpdateDOM(filters) {
   // if(durationFilter){
   //   const durationInput = document.getElementById("duration-select")
   //   durationInput.value = durationFilter.value
-
-    const categoryPills = filters.category.map(filter => {
-      return `<div class="category-pill">${filter.value}</div>`;
+  document.getElementById("category-list").textContent = "";
+     filters.category.forEach((category) => {
+     let pillele = document.createElement("div")
+     pillele.className = "category-filter";
+     pillele.innerHTML = `<div>${category}</div>`
+     document.getElementById("category-list").append(pillele);
     })
-    const categoryPillsContainer = document.getElementById("category-list")
-    categoryPillsContainer.innerHTML = categoryPills;
+    
   }
  
 

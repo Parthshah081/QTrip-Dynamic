@@ -21,7 +21,7 @@ try{
 }
 
   // Place holder for functionality to work in the Stubs
-  catch{
+  catch(e){
   return null;
 }
 }
