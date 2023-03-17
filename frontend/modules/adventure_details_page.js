@@ -138,30 +138,30 @@ function captureFormSubmit(adventure) {
     name : myElements["name"].value,
     date : myElements["date"].value,
     person : myElements["person"].value,
-    adventure : adventure.id
+    adventure : adventure.id,
   })
   try{
     let res = await fetch(url,{
     method : "POST",
     body : formstring,
     headers : {
-      "StringContaining":"application/json"
-    }
+      "StringContaining":"application/json",
+    },
     });
     debugger;
     if(res.ok){
-      alert("success!")
-      windows.location.reload()
+      alert("success!");
+      windows.location.reload();
     }else{
       let data = res.json();
-      alert(`failed ${data.message}`)
+      alert(`failed ${data.message}`);
     } 
   }
   catch(error){
     // console.log(error)
    alert("failed");
   }
- })
+ });
 }
 
 //Implementation of success banner after reservation
